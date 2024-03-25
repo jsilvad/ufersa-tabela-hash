@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "hash.h"
+
+#define ARQUIVO_CONTATOS "contatos.txt"
 
 int main() {
     // Inicializa a tabela hash
@@ -7,7 +10,7 @@ int main() {
     inicializarTabelaHash(&tabela);
 
     // Abre o arquivo contatos.txt para leitura
-    FILE *file = fopen("contatos.txt", "r");
+    FILE *file = fopen(ARQUIVO_CONTATOS, "r");
     if (file == NULL) {
         fprintf(stderr, "Erro: nao foi possivel abrir o arquivo.\n");
         return 1;
@@ -16,7 +19,7 @@ int main() {
     Contato contato;
     int colisoes = 0;
     // Lê os contatos do arquivo e insere na tabela hash
-    while (fscanf(file, "%s %s %s", contato.nome, contato.telefone, contato.email) == 3) {
+    while (fscanf(file, "Nome: %[^\n]\nTelefone: %[^\n]\nEmail: %[^\n]\n\n", contato.nome, contato.telefone, contato.email) == 3) {
         unsigned int indice = funcaoHash(contato.nome);
         if (tabela.vetor[indice] != NULL) {
             colisoes++; // Conta as colisões encontradas durante a inserção

@@ -4,7 +4,7 @@
 #include <string.h>
 
 void inicializarTabelaHash(TabelaHash *tabela) {
-    for (int i = 0; i < TAMANHO_TABELA; i++) {
+    for (int i = 0; i < TAMANHO_TABELA_MAX; i++) {
         tabela->vetor[i] = NULL;
     }
     tabela->tamanho = 0;
@@ -13,24 +13,13 @@ void inicializarTabelaHash(TabelaHash *tabela) {
 unsigned int funcaoHash(char *chave) {
     unsigned int hash = 0;
     int len = strlen(chave);
-    int partes = len / 4;  // Dividindo a chave em partes de 4 caracteres
 
-    for (int i = 0; i < partes; i++) {
-        char parte[5];
-        strncpy(parte, &chave[i * 4], 4);
-        parte[4] = '\0';
-        hash += atoi(parte);  // Convertendo a parte para um número e somando ao hash
+    // Técnica de dobramento
+    for (int i = 0; i < len; i++) {
+        hash = (hash << 5) + chave[i];
     }
 
-    // Tratando os caracteres restantes se a chave não for divisível por 4
-    if (len % 4 != 0) {
-        char parte[5];
-        strncpy(parte, &chave[partes * 4], len % 4);
-        parte[len % 4] = '\0';
-        hash += atoi(parte);
-    }
-
-    return hash % TAMANHO_TABELA;
+    return hash % TAMANHO_TABELA_MAX;
 }
 
 // Insere um contato na tabela hash
