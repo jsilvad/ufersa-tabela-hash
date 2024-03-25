@@ -12,12 +12,10 @@ void inicializarTabelaHash(TabelaHash *tabela) {
 
 unsigned int funcaoHash(char *chave) {
     unsigned int hash = 0;
-    int c;
-
-    while ((c = *chave++)) {
-        hash = ((hash << 5) + hash) + c;
+    int len = strlen(chave);
+    for (int i = 0; i < len; i += 2) {
+        hash += (chave[i] + (i + 1 < len ? chave[i + 1] : 0)) << (i % 8);
     }
-
     return hash % TAMANHO_TABELA;
 }
 

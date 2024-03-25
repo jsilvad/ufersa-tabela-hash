@@ -1,12 +1,12 @@
 #ifndef HASH_H
 #define HASH_H
 
-#define TAMANHO_TABELA 10019  // Tamanho da tabela hash (número primo)
+#define TAMANHO_TABELA 5003  // Tamanho da tabela hash (número primo)
 
 typedef struct {
-    char nome[100];
+    char nome[50];
     char telefone[20];
-    char email[100];
+    char email[40];
 } Contato;
 
 typedef struct No {
@@ -16,7 +16,7 @@ typedef struct No {
 
 typedef struct {
     No *vetor[TAMANHO_TABELA];
-    int tamanho;  // Tamanho atual da tabela
+    int tamanho;
 } TabelaHash;
 
 void inicializarTabelaHash(TabelaHash *tabela);
