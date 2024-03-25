@@ -21,6 +21,8 @@ int main() {
         inserirContato(&tabela, contato);
     }
 
+    printf("Numero de colisoes: %d\n", colisoes);
+
     fclose(file);
 
     return 0;
