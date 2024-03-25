@@ -29,12 +29,22 @@ int main() {
     fclose(file);
 
     // Testando a busca
-    // No *resultadoBusca = buscarContato(tabela, "Gustavo Carvalho");
+    // No *resultadoBusca = buscarContato(tabela, "Nome Contato");
     // if (resultadoBusca != NULL) {
     //     printf("Contato encontrado: %s, %s, %s\n", resultadoBusca->contato.nome, resultadoBusca->contato.telefone, resultadoBusca->contato.email);
     // } else {
     //     printf("Contato não encontrado.\n");
     // }
+
+    // Testando a inserção
+    Contato novoContato = {"Teste Nome", "Teste Telefone", "Teste Email"};
+    inserirContato(&tabela, novoContato);
+    No *resultadoBusca = buscarContato(tabela, "Teste Nome");
+    if (resultadoBusca != NULL) {
+        printf("Contato inserido com sucesso: %s, %s, %s\n", resultadoBusca->contato.nome, resultadoBusca->contato.telefone, resultadoBusca->contato.email);
+    } else {
+        printf("Falha ao inserir o contato.\n");
+    }
 
     return 0;
 }
