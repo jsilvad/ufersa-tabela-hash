@@ -19,6 +19,7 @@ typedef struct {
     int tamanho;
 } TabelaHash;
 
+// Funções da interface da tabela hash
 void inicializarTabelaHash(TabelaHash *tabela);
 unsigned int funcaoHash(char *chave);
 void inserirContato(TabelaHash *tabela, Contato novoContato);
