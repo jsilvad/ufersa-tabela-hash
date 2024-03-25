@@ -3,16 +3,21 @@
 #include <string.h>
 #include "hash.h"
 
+#define LINHA_TAMANHO 120
+
 int main() {
     TabelaHash tabela;
     inicializarTabelaHash(&tabela);
 
     FILE *file = fopen("contatos.txt", "r");
+    if (file == NULL) {
+        fprintf(stderr, "Erro ao abrir o arquivo contatos.txt.\n");
+        return 1;
+    }
 
     Contato contato;
     int colisoes = 0;
-
-    char linha[120];
+    char linha[LINHA_TAMANHO];
     while (fgets(linha, sizeof(linha), file)) {
         sscanf(linha, "Nome: %[^\n]", contato.nome);
         fgets(linha, sizeof(linha), file);
@@ -47,7 +52,7 @@ int main() {
 
         switch (opcao) {
             case 1:
-                printf("\nNumero de colisoes: %d\n", colisoes);
+                printf("Numero de colisoes: %d\n", colisoes);
                 break;
             case 2:
                 printf("Digite o nome do contato: ");
@@ -74,9 +79,9 @@ int main() {
                 scanf(" %[^\n]", nome);
                 resultadoBusca = buscarContato(tabela, nome);
                 if (resultadoBusca != NULL) {
-                    printf("Contato encontrado: %s, %s, %s\n", resultadoBusca->contato.nome, resultadoBusca->contato.telefone, resultadoBusca->contato.email);
+                    printf("\nContato encontrado: %s, %s, %s\n", resultadoBusca->contato.nome, resultadoBusca->contato.telefone, resultadoBusca->contato.email);
                 } else {
-                    printf("Contato nao encontrado.\n");
+                    printf("\nContato nao encontrado.\n");
                 }
                 break;
             case 5:
@@ -87,6 +92,8 @@ int main() {
                 break;
         }
     } while (opcao != 5);
+
+    liberarTabelaHash(&tabela);
 
     return 0;
 }

@@ -13,16 +13,15 @@ void inicializarTabelaHash(TabelaHash *tabela) {
 unsigned int funcaoHash(char *chave) {
     unsigned int hash = 0;
     int len = strlen(chave);
-    int partes = len / 4;  // Dividindo a chave em partes de 4 caracteres
+    int partes = len / 4;
 
     for (int i = 0; i < partes; i++) {
         char parte[5];
         strncpy(parte, &chave[i * 4], 4);
         parte[4] = '\0';
-        hash += atoi(parte);  // Convertendo a parte para um número e somando ao hash
+        hash += atoi(parte);
     }
 
-    // Tratando os caracteres restantes se a chave não for divisível por 4
     if (len % 4 != 0) {
         char parte[5];
         strncpy(parte, &chave[partes * 4], len % 4);
@@ -33,32 +32,24 @@ unsigned int funcaoHash(char *chave) {
     return hash % TAMANHO_TABELA;
 }
 
-// Insere um contato na tabela hash
 void inserirContato(TabelaHash *tabela, Contato novoContato) {
-    // Calcula o índice do vetor usando a função de hash
     unsigned int indice = funcaoHash(novoContato.nome);
 
-    // Aloca memória para o novo nó
     No *novoNo = malloc(sizeof(No));
     if (novoNo == NULL) {
-        fprintf(stderr, "Erro: nao foi possivel alocar memoria.\n");
+        fprintf(stderr, "Erro: não foi possível alocar memória.\n");
         return;
     }
 
-    // Copia os dados do contato para o novo nó
     strcpy(novoNo->contato.nome, novoContato.nome);
     strcpy(novoNo->contato.telefone, novoContato.telefone);
     strcpy(novoNo->contato.email, novoContato.email);
-    // Insere o novo nó no início da lista encadeada na posição adequada do vetor
     novoNo->prox = tabela->vetor[indice];
     tabela->vetor[indice] = novoNo;
 
-    // Incrementa o tamanho da tabela
     tabela->tamanho++;
 }
 
-
-// Busca por um contato na tabela hash
 No *buscarContato(TabelaHash tabela, char *chave) {
     unsigned int indice = funcaoHash(chave);
     No *atual = tabela.vetor[indice];
@@ -73,13 +64,11 @@ No *buscarContato(TabelaHash tabela, char *chave) {
     return NULL;
 }
 
-// Remove um contato da tabela hash
 void removerContato(TabelaHash *tabela, char *chave) {
     unsigned int indice = funcaoHash(chave);
     No *atual = tabela->vetor[indice];
     No *anterior = NULL;
 
-    // Percorre a lista encadeada buscando pelo contato a ser removido
     while (atual != NULL) {
         if (strcmp(atual->contato.nome, chave) == 0) {
             if (anterior == NULL) {
@@ -93,5 +82,17 @@ void removerContato(TabelaHash *tabela, char *chave) {
         }
         anterior = atual;
         atual = atual->prox;
+    }
+}
+
+void liberarTabelaHash(TabelaHash *tabela) {
+    for (int i = 0; i < TAMANHO_TABELA; i++) {
+        No *atual = tabela->vetor[i];
+        while (atual != NULL) {
+            No *proximo = atual->prox;
+            free(atual);
+            atual = proximo;
+        }
+        tabela->vetor[i] = NULL;
     }
 }

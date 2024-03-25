@@ -24,5 +24,6 @@ unsigned int funcaoHash(char *chave);
 void inserirContato(TabelaHash *tabela, Contato novoContato);
 No *buscarContato(TabelaHash tabela, char *chave);
 void removerContato(TabelaHash *tabela, char *chave);
+void liberarTabelaHash(TabelaHash *tabela);
 
 #endif
