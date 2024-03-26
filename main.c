@@ -44,21 +44,18 @@ int main() {
 
     // Menu principal para interação com o usuário
     do {
-        printf("\n----------- MENU -----------\n");
-        printf("1. Ver numero de colisoes\n");
-        printf("2. Inserir um contato\n");
-        printf("3. Remover contato\n");
-        printf("4. Buscar um contato\n");
+        printf("\n---------------- MENU ----------------\n");
+        printf("1. Inserir um contato\n");
+        printf("2. Remover contato\n");
+        printf("3. Buscar um contato\n");
+        printf("4. Listar numero de colisoes\n\n");
         printf("5. Sair\n");
-        printf("----------------------------\n");
+        printf("--------------------------------------\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
             case 1:
-                printf("Numero de colisoes: %d\n", colisoes); // Exibe o número de colisões na tabela hash
-                break;
-            case 2:
                 // Solicita ao usuário os dados do novo contato a ser inserido
                 printf("Digite o nome do contato: ");
                 scanf(" %[^\n]", nome);
@@ -73,14 +70,14 @@ int main() {
                 inserirContato(&tabela, novoContato); // Insere o novo contato na tabela hash
                 printf("\nContato inserido com sucesso.\n");
                 break;
-            case 3:
+            case 2:
                 // Solicita ao usuário o nome do contato a ser removido
                 printf("Digite o nome do contato a ser removido: ");
                 scanf(" %[^\n]", nome);
                 removerContato(&tabela, nome);
                 printf("\nContato removido com sucesso.\n");
                 break;
-            case 4:
+            case 3:
                 // Solicita ao usuário o nome do contato a ser buscado
                 printf("Digite o nome do contato a ser buscado: ");
                 scanf(" %[^\n]", nome);
@@ -91,6 +88,9 @@ int main() {
                 } else {
                     printf("\nContato nao encontrado.\n");
                 }
+                break;
+            case 4:
+                printf("Numero de colisoes: %d\n", colisoes); // Exibe o número de colisões na tabela hash
                 break;
             case 5:
                 printf("Saindo...\n"); // Encerra o programa

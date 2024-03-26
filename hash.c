@@ -17,25 +17,20 @@ unsigned int funcaoHash(char *chave) {
     int len = strlen(chave);
     int partes = len / 4;
 
-    // Calcula o hash somando os valores numéricos de partes da chave
     for (int i = 0; i < partes; i++) {
-        char parte[5];
-        strncpy(parte, &chave[i * 4], 4);
-        parte[4] = '\0';
-        hash += atoi(parte);
+        for (int j = 0; j < 4; j++) {
+            hash += chave[i * 4 + j];
+        }
     }
 
-    // Calcula o hash para os caracteres restantes da chave
     if (len % 4 != 0) {
-        char parte[5];
-        strncpy(parte, &chave[partes * 4], len % 4);
-        parte[len % 4] = '\0';
-        hash += atoi(parte);
+        for (int i = 0; i < len % 4; i++) {
+            hash += chave[partes * 4 + i];
+        }
     }
 
-    return hash % TAMANHO_TABELA; // Retorna o índice da tabela hash
+    return hash % TAMANHO_TABELA;
 }
-
 
 // Insere um novo contato na tabela hash
 void inserirContato(TabelaHash *tabela, Contato novoContato) {
@@ -43,7 +38,7 @@ void inserirContato(TabelaHash *tabela, Contato novoContato) {
 
     No *novoNo = malloc(sizeof(No)); // Aloca memória para um novo nó
     if (novoNo == NULL) {
-        fprintf(stderr, "Erro: não foi possível alocar memória.\n");
+        fprintf(stderr, "Erro: nao foi possivel alocar memoria.\n");
         return;
     }
 
@@ -64,14 +59,18 @@ No *buscarContato(TabelaHash tabela, char *chave) {
     unsigned int indice = funcaoHash(chave); // Calcula o índice usando a função de hash
     No *atual = tabela.vetor[indice]; // Inicia a busca a partir do primeiro nó na lista encadeada correspondente ao índice
 
-    // Percorre a lista encadeada buscando pelo contato com o nome correspondente à chave
+    int contatosEncadeados = 0;
     while (atual != NULL) {
+        contatosEncadeados++;
         if (strcmp(atual->contato.nome, chave) == 0) {
+            printf("\nContato encontrado na posicao: %u\n", indice);
+            printf("Numero de contatos encadeados na mesma posicao: %d\n", contatosEncadeados);
             return atual;
         }
         atual = atual->prox;
     }
 
+    printf("Contato nao encontrado.\n");
     return NULL;
 }
 
