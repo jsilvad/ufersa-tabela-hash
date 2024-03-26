@@ -38,7 +38,7 @@ void inserirContato(TabelaHash *tabela, Contato novoContato) {
 
     No *novoNo = malloc(sizeof(No)); // Aloca memória para um novo nó
     if (novoNo == NULL) {
-        fprintf(stderr, "Erro: não foi possível alocar memória.\n");
+        fprintf(stderr, "Erro: nao foi possivel alocar memoria.\n");
         return;
     }
 
