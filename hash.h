@@ -1,7 +1,7 @@
 #ifndef HASH_H
 #define HASH_H
 
-#define TAMANHO_TABELA 2000
+#define TAMANHO_TABELA 20
 
 // Estrutura para armazenar os dados de um contato
 typedef struct {
