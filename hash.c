@@ -59,12 +59,9 @@ No *buscarContato(TabelaHash tabela, char *chave) {
     unsigned int indice = funcaoHash(chave); // Calcula o índice usando a função de hash
     No *atual = tabela.vetor[indice]; // Inicia a busca a partir do primeiro nó na lista encadeada correspondente ao índice
 
-    int contatosEncadeados = 0;
     while (atual != NULL) {
-        contatosEncadeados++;
         if (strcmp(atual->contato.nome, chave) == 0) {
-            printf("\nContato encontrado na posicao: %u\n", indice);
-            printf("Numero de contatos encadeados na mesma posicao: %d\n", contatosEncadeados);
+            printf("\nContato encontrado na posicao: %u", indice); // Imprime a posição na tabela hash onde o contato está localizado
             return atual;
         }
         atual = atual->prox;

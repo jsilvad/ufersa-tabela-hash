@@ -1,13 +1,17 @@
 #ifndef HASH_H
 #define HASH_H
 
-#define TAMANHO_TABELA 20
+#define TAMANHO_TABELA 10
+
+#define TAMANHO_NOME 50
+#define TAMANHO_TELEFONE 15
+#define TAMANHO_EMAIL 40
 
 // Estrutura para armazenar os dados de um contato
 typedef struct {
-    char nome[50];
-    char telefone[15];
-    char email[40];
+    char nome[TAMANHO_NOME];
+    char telefone[TAMANHO_TELEFONE];
+    char email[TAMANHO_EMAIL];
 } Contato;
 
 // Estrutura de um nó da lista encadeada utilizada na tabela hash
@@ -22,6 +26,7 @@ typedef struct {
     int tamanho;                // Número de elementos na tabela hash
 } TabelaHash;
 
+// Declaração das funções que manipulam a tabela hash
 void inicializarTabelaHash(TabelaHash *tabela);
 unsigned int funcaoHash(char *chave);
 void inserirContato(TabelaHash *tabela, Contato novoContato);
