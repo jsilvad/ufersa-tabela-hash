@@ -8,7 +8,6 @@ Este projeto é uma implementação de uma tabela hash em C com o objetivo de ge
 - **Busca de Contatos:** Permite encontrar um contato pelo nome.
 - **Remoção de Contatos:** Permite excluir um contato da lista.
 - **Estatísticas de Colisões:** Mostra o número de colisões ocorridas durante a inserção de contatos.
-- **Capacidade de Armazenamento Otimizada:** Utiliza uma tabela hash com encadeamento exterior para armazenar os contatos de forma eficiente.
 
 ## Descrição
 
