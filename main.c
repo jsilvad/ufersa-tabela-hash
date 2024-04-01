@@ -51,7 +51,7 @@ int main() {
         printf("1. Inserir um contato\n");
         printf("2. Remover contato\n");
         printf("3. Buscar um contato\n\n");
-        printf("4. Listar contatos em uma posicao\n"); // Adicione esta linha para a opção de listar contatos em uma posição
+        printf("4. Listar contatos em uma posicao\n");
         printf("5. Visualizar numero total de colisoes \n\n");
         printf("6. Sair\n");
         printf("--------------------------------------\n");
@@ -70,7 +70,7 @@ int main() {
                 strcpy(novoContato.nome, nome);
                 strcpy(novoContato.telefone, telefone);
                 strcpy(novoContato.email, email);
-                inserirContato(&tabela, novoContato); // Insere o novo contato na tabela hash
+                inserirContato(&tabela, novoContato);
                 printf("\nContato inserido com sucesso.\n");
                 break;
             case 2:
@@ -108,7 +108,7 @@ int main() {
                 }
                 break;
             case 5:
-                printf("Numero de colisoes: %d\n", colisoes); // Imprime o número de colisões
+                printf("Numero de colisoes: %d\n", colisoes);
                 break;
             case 6:
                 printf("Saindo...\n"); // Encerra o programa
